@@ -25,7 +25,7 @@ conn.commit()
 
 # PRODUCT METHODS
 def get_products():
-    cur.execute("SELECT * FROM product")
+    cur.execute("SELECT * FROM product order by id;")
     rows = cur.fetchall()
     columns = [desc[0] for desc in cur.description]
     result = [dict(zip(columns, row)) for row in rows]
@@ -53,7 +53,7 @@ def delete_product(product_id: str):
 
 # CATEGORY METHODS
 def get_category():       # GET
-    cur.execute("SELECT * FROM category")
+    cur.execute("SELECT * FROM category order by id")
     rows = cur.fetchall()
     columns = [desc[0] for desc in cur.description]
     result = [dict(zip(columns, row)) for row in rows]
