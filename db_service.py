@@ -1,13 +1,12 @@
-from psycopg2 import connect
+
 import json
 
-conn = connect(
-    host="127.0.0.1",
-    user="postgres",
-    password="1",
-    database="market",
-    port="5432"
-)
+import os
+from psycopg2 import connect
+
+DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://postgres:1@127.0.0.1:5432/market")
+
+conn = connect(DATABASE_URL)
 
 cur = conn.cursor()
 
