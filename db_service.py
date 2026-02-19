@@ -10,6 +10,19 @@ conn = connect(DATABASE_URL)
 
 cur = conn.cursor()
 
+cur.execute("create table if not exists category("
+            "id serial,"
+            "name varchar unique primary key not null);")
+conn.commit()
+
+cur.execute("create table if not exists product ("
+            "id serial primary key,"
+            "name varchar not null,"
+            "price int not null,"
+            "unit varchar not null,"
+            "category_name varchar references category (name) not null);")
+conn.commit()
+
 # PRODUCT METHODS
 def get_products():
     cur.execute("SELECT * FROM product")
