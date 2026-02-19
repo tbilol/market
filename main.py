@@ -1,8 +1,17 @@
 from fastapi import FastAPI, status
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from db_service import get_products, update_product, delete_product, delete_category, get_category, post_category, post_product
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"], # Hamma manzillarga ruxsat berish
+    allow_credentials=True,
+    allow_methods=["*"], # GET, POST, PUT va h.k.
+    allow_headers=["*"],
+)
 
 class Product(BaseModel):
     name: str
